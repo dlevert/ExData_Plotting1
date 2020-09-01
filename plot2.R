@@ -1,4 +1,4 @@
-plot1 <- function(){
+plot2 <- function(){
   library(dplyr)
   library(lubridate)
   x <- subset(read.csv("household_power_consumption.txt", sep = ";"), 
@@ -9,9 +9,9 @@ plot1 <- function(){
   rm(y)
   x$Date <- as.Date(x$Date, "%d/%m/%Y")
   x[,3:9] <- lapply(x[,3:9], as.numeric)
-  png(filename = "plot1.png", width = 480, height = 480)
-  hist(x$Global_active_power, col="red",
-       xlab = "Global Active Power (kilowatts)", 
-       main = "Global Active Power")
+  png(filename = "plot2.png", width = 480, height = 480)
+  plot(x$Global_active_power, type = "l", xlab = "", 
+       ylab = "Global Active Power (kilowatts)", xaxt = "none")
+  +axis(1, at = seq(0,2880,1440), labels = c("Thu","Fri","Sat"))
   dev.off()
 }
